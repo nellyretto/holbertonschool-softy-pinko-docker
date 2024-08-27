@@ -11,5 +11,5 @@ services:
       context: ./back-end
       dockerfile: Dockerfile
     image: docdoc:latest
-
-
+    ports: 
+    - "9001:5252"
