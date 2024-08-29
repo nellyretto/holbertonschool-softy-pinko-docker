@@ -1,28 +1,22 @@
-version: '3'
 services:
-  front-end:
+  frontend:
     build:
       context: ./front-end
       dockerfile: Dockerfile
-    image: front-end-image
-    expose:
-      - "9000"
-
-  back-end:
+    image: docdoc:latest
+    depends_on: 
+    - backend
+  backend:
     build:
       context: ./back-end
       dockerfile: Dockerfile
-    image: back-end-image
-    expose:
-      - "5252"
-
-  proxy:
-    build:
-      context: ./proxy
-      dockerfile: Dockerfile
-    image: proxy-image
-    ports:
-      - "80:80"
-    depends_on:
-      - front-end
-      - back-end
+    image: docdoc:latest
+    ports: 
+    - "9001:5252"
+    proxy:
+  build:
+    context: ./proxy
+    dockerfile: Dockerfile
+  image: proxy:latest
+  ports:
+    - "80:80"
